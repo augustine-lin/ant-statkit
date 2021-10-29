@@ -1,0 +1,174 @@
+//====================================
+//              FOR LOOP             =
+//====================================
+.for(@i, @n) {
+    .-each(@i)
+}
+
+.for(@n) when (isnumber(@n)) {
+    .for(1, @n)
+}
+
+.for(@i, @n) when not (@i =@n) {
+    .for((@i + (@n - @i) / abs(@n - @i)), @n);
+}
+
+//--------  End of for loop  ---------//
+
+
+
+//=========================================
+//              FOR EACH LOOP             =
+//=========================================
+.for(@array) when (default()) {
+    .for-impl_(length(@array))
+}
+
+.for-impl_(@i) when (@i > 1) {
+    .for-impl_((@i - 1))
+}
+
+.for-impl_(@i) when (@i > 0) {
+    .-each(extract(@array, @i))
+}
+
+//--------  End of for each loop  ---------//
+
+
+
+
+
+
+///////////////
+// variables //
+///////////////
+@screen-xs: 0;
+@screen-sm: 480px;
+@screen-md: 768px;
+@screen-lg: 992px;
+@screen-xl: 1600px;
+
+
+
+@space-base: 4px;
+@values-array: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10;
+
+
+
+// global
+@media (min-width: @screen-xs) {
+    .make-default-space();
+}
+
+// mobile
+@media (min-width: @screen-sm) {
+    .make-space(@prefix: sm);
+}
+
+// tablet
+@media (min-width: @screen-md) {
+    .make-space(@prefix: md);
+}
+
+// desktop
+@media (min-width: @screen-lg) {
+    .make-space(@prefix: lg);
+}
+
+// large screens
+@media (min-width: @screen-xl) {
+    .make-space(@prefix: xl);
+}
+
+// init functions
+.make-space(@prefix) {
+    .for(@values-array);
+
+    .-each(@value) {
+        .pa-@{prefix}-@{value} {
+            padding: @value * @space-base;
+        }
+
+        .pt-@{prefix}-@{value} {
+            padding-top: @value * @space-base;
+        }
+
+        .pl-@{prefix}-@{value} {
+            padding-left: @value * @space-base;
+        }
+
+        .pr-@{prefix}-@{value} {
+            padding-right: @value * @space-base;
+        }
+
+        .pb-@{prefix}-@{value} {
+            padding-bottom: @value * @space-base;
+        }
+
+        .ma-@{prefix}-@{value} {
+            margin: @value * @space-base;
+        }
+
+        .mt-@{prefix}-@{value} {
+            margin-top: @value * @space-base;
+        }
+
+        .ml-@{prefix}-@{value} {
+            margin-left: @value * @space-base;
+        }
+
+        .mr-@{prefix}-@{value} {
+            margin-right: @value * @space-base;
+        }
+
+        .mb-@{prefix}-@{value} {
+            margin-bottom: @value * @space-base;
+        }
+    }
+}
+
+.make-default-space {
+    .for(@values-array);
+
+    .-each(@value) {
+        .pa-@{value} {
+            padding: @value * @space-base;
+        }
+
+        .pt-@{value} {
+            padding-top: @value * @space-base;
+        }
+
+        .pl-@{value} {
+            padding-left: @value * @space-base;
+        }
+
+        .pr-@{value} {
+            padding-right: @value * @space-base;
+        }
+
+        .pb-@{value} {
+            padding-bottom: @value * @space-base;
+        }
+
+        .ma-@{value} {
+            margin: @value * @space-base;
+        }
+
+        .mt-@{value} {
+            margin-top: @value * @space-base;
+        }
+
+        .ml-@{value} {
+            margin-left: @value * @space-base;
+        }
+
+        .mr-@{value} {
+            margin-right: @value * @space-base;
+        }
+
+        .mb-@{value} {
+            margin-bottom: @value * @space-base;
+        }
+    }
+}

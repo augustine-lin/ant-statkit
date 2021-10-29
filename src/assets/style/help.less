@@ -1,0 +1,37 @@
+@colors:
+    ~'primary' @primary-color,
+    ~'info' @info-color,
+    ~'success' @success-color,
+    ~'processing' @processing-color,
+    ~'error' @error-color,
+    ~'highlight' @highlight-color,
+    ~'warning' @warning-color,
+    ~'normal' @normal-color,
+    ~'white' @white,
+    ~'black' @black;
+
+.make-classes(@prefix, @list, @style-name) {
+    .iter(length(@list));
+    .iter(@i) when (@i > 0) {
+        .iter(@i - 1);
+        @pair:  extract(@list, @i); 
+        @key: extract(@pair, 1);
+        @value: extract(@pair, 2); 
+        .@{prefix}-@{key} {
+            @{style-name}: @value;  
+        }
+    }
+}
+
+// Attribute Color Generator
+// When it is compiled
+// it will generate class like the ones below
+// .text-primary, .text-info, .text-success
+// .text-processing, .text-error, .text-highlight
+// .text-warning, .text-normal, .text-white, .text-black
+
+// text color generator
+.make-classes(text, @colors, color);
+
+// background color generator
+.make-classes(bg, @colors, background-color);
