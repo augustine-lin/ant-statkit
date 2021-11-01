@@ -24,9 +24,9 @@
           :type="collapsed ? 'menu-unfold' : 'menu-fold'"
           @click="() => (collapsed = !collapsed)"
         />
-           <a-button type="primary" class="text-success">
-      Primary
-    </a-button>
+        <a-button type="primary" class="text-success">
+          Primary
+        </a-button>
       </a-layout-header>
       <a-layout-content
         :style="{
